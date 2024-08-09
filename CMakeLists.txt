@@ -26,6 +26,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(DataPalette
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        cleaningwidget.h cleaningwidget.cpp cleaningwidget.ui
+        homewidget.h homewidget.cpp homewidget.ui
+        datawidget.h datawidget.cpp datawidget.ui
+        visualizationwidget.h visualizationwidget.cpp visualizationwidget.ui
+        pluginwidget.h pluginwidget.cpp pluginwidget.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET DataPalette APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

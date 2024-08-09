@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HomeWidget</class>
+ <widget class="QWidget" name="HomeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="userLabel">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>100</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>User:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="serverLinedEdit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>0</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dbLabel">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>50</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Database:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="dbLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>50</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="userLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>100</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="serverLabel">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>0</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Server:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="passwordLabel">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>150</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Password:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="passwordLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>150</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="dbConnectionButton">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>270</y>
+     <width>131</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Connect to Database</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

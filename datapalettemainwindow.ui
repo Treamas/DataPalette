@@ -14,109 +14,81 @@
    <string>DataPaletteMainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="dbConnectionButton">
+   <widget class="QPushButton" name="cleaningButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>440</y>
-      <width>131</width>
+      <x>370</x>
+      <y>70</y>
+      <width>75</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Connect to Database</string>
+     <string>Cleaning</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="dbLineEdit">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>220</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="userLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>270</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="passwordLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>320</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverLinedEdit">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
+      <x>10</x>
       <y>170</y>
-      <width>113</width>
-      <height>22</height>
+      <width>771</width>
+      <height>381</height>
      </rect>
     </property>
+    <widget class="QWidget" name="page"/>
+    <widget class="QWidget" name="page_2"/>
    </widget>
-   <widget class="QLabel" name="serverLabel">
+   <widget class="QPushButton" name="homeButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>170</y>
-      <width>49</width>
-      <height>16</height>
+      <x>160</x>
+      <y>70</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Server:</string>
+     <string>Home</string>
     </property>
    </widget>
-   <widget class="QLabel" name="dbLabel">
+   <widget class="QPushButton" name="dataButton">
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>220</y>
-      <width>49</width>
-      <height>16</height>
+      <y>70</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Database:</string>
+     <string>Data</string>
     </property>
    </widget>
-   <widget class="QLabel" name="userLabel">
+   <widget class="QPushButton" name="visualizationButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>270</y>
-      <width>49</width>
-      <height>16</height>
+      <x>480</x>
+      <y>70</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>User:</string>
+     <string>Visualization</string>
     </property>
    </widget>
-   <widget class="QLabel" name="passwordLabel">
+   <widget class="QPushButton" name="pluginButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>320</y>
-      <width>49</width>
-      <height>16</height>
+      <x>590</x>
+      <y>70</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Password:</string>
+     <string>Plugins</string>
     </property>
    </widget>
   </widget>

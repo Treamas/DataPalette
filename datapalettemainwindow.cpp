@@ -1,50 +1,50 @@
 #include "datapalettemainwindow.h"
 #include "./ui_datapalettemainwindow.h"
-#include <QMessageBox>
-#include <QtSql/QSqlError>
 
 DataPaletteMainWindow::DataPaletteMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::DataPaletteMainWindow)
+    , homeWidget(new HomeWidget)
+    , dataWidget(new DataWidget)
+    , cleaningWidget(new CleaningWidget)
+    , visualizationWidget(new VisualizationWidget)
+    , pluginWidget(new PluginWidget)
 {
     ui->setupUi(this);
-    connect(ui->dbConnectionButton, &QPushButton::clicked, this, &DataPaletteMainWindow::on_dbConnectionButton_clicked);
+    ui->stackedWidget->addWidget(homeWidget);
+    ui->stackedWidget->addWidget(dataWidget);
+    ui->stackedWidget->addWidget(cleaningWidget);
+    ui->stackedWidget->addWidget(visualizationWidget);
+    ui->stackedWidget->addWidget(pluginWidget);
 }
 
 DataPaletteMainWindow::~DataPaletteMainWindow()
 {
-    if (db.isOpen()) {
-        db.close();
-    }
     delete ui;
 }
 
-void DataPaletteMainWindow::on_dbConnectionButton_clicked()
+void DataPaletteMainWindow::on_homeButton_clicked()
 {
-    // Close any existing connection
-    QString connectionName;
-    {
-        QSqlDatabase existingDb = QSqlDatabase::database();
-        if (existingDb.isValid()) {
-            connectionName = existingDb.connectionName();
-            existingDb.close();
-        }
-    }
-    QSqlDatabase::removeDatabase(connectionName);
-
-    // Create a new connection
-    QString server = ui->serverLinedEdit->text();
-    QString database = ui->dbLineEdit->text();
-    QString username = ui->userLineEdit->text();
-    QString password = ui->passwordLineEdit->text();
-
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName(QString("Driver={ODBC Driver 17 for SQL Server};Server=%1;Database=%2;Uid=%3;Pwd=%4;")
-                           .arg(server, database, username, password));
-
-    if (db.open()) {
-        QMessageBox::information(this, "Connection", "Database connected successfully");
-    } else {
-        QMessageBox::critical(this, "Connection", "Database connection failed: " + db.lastError().text());
-    }
+    ui->stackedWidget->setCurrentWidget(homeWidget);
 }
+
+void DataPaletteMainWindow::on_dataButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(dataWidget);
+}
+
+void DataPaletteMainWindow::on_cleaningButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(cleaningWidget);
+}
+
+void DataPaletteMainWindow::on_visualizationButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(visualizationWidget);
+}
+
+void DataPaletteMainWindow::on_pluginButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(pluginWidget);
+}
+

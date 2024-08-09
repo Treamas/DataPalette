@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
+#include "homewidget.h"
+#include "datawidget.h"
+#include "cleaningwidget.h"
+#include "visualizationwidget.h"
+#include "pluginwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,10 +24,18 @@ public:
     ~DataPaletteMainWindow();
 
 private slots:
-    void on_dbConnectionButton_clicked();
+    void on_homeButton_clicked();
+    void on_dataButton_clicked();
+    void on_cleaningButton_clicked();
+    void on_visualizationButton_clicked();
+    void on_pluginButton_clicked();
 
 private:
     Ui::DataPaletteMainWindow *ui;
-    QSqlDatabase db;
+    HomeWidget *homeWidget;
+    DataWidget *dataWidget;
+    CleaningWidget *cleaningWidget;
+    VisualizationWidget *visualizationWidget;
+    PluginWidget *pluginWidget;
 };
 #endif // DATAPALETTEMAINWINDOW_H
