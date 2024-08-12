@@ -16,6 +16,8 @@ DataPaletteMainWindow::DataPaletteMainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(cleaningWidget);
     ui->stackedWidget->addWidget(visualizationWidget);
     ui->stackedWidget->addWidget(pluginWidget);
+
+    connect(homeWidget, &HomeWidget::databaseConnectionChanged, dataWidget, &DataWidget::populateTableList);
 }
 
 DataPaletteMainWindow::~DataPaletteMainWindow()

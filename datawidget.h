@@ -15,6 +15,10 @@ public:
     explicit DataWidget(QWidget *parent = nullptr);
     ~DataWidget();
 
+public slots:
+    void populateTableList();
+    void onTableSelected(const QModelIndex &index);
+
 private:
     Ui::DataWidget *ui;
 };

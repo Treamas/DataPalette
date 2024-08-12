@@ -2,7 +2,8 @@
 #define HOMEWIDGET_H
 
 #include <QWidget>
-#include <QtSql/QSqlDatabase>
+#include <QLabel>
+#include <QTimer>
 
 namespace Ui {
 class HomeWidget;
@@ -16,12 +17,19 @@ public:
     explicit HomeWidget(QWidget *parent = nullptr);
     ~HomeWidget();
 
+signals:
+    void databaseConnectionChanged(bool successful);
+
 private slots:
     void on_dbConnectionButton_clicked();
 
 private:
     Ui::HomeWidget *ui;
-    QSqlDatabase db;
+    bool isConnecting;
+    QLabel *statusLabel;
+    QTimer *statusTimer;
+
+    void showNotification(const QString &message, bool success);
 };
 
 #endif // HOMEWIDGET_H

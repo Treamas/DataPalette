@@ -1,50 +1,76 @@
 #include "homewidget.h"
 #include "ui_homewidget.h"
-#include <QMessageBox>
-#include <QtSql/QSqlError>
+#include "databasemanager.h"
+
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 
 HomeWidget::HomeWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::HomeWidget)
+    , isConnecting(false)
+    , statusTimer(new QTimer(this))
 {
     ui->setupUi(this);
-    connect(ui->dbConnectionButton, &QPushButton::clicked, this, &HomeWidget::on_dbConnectionButton_clicked);
+
+    // Set up the notification timer
+    statusTimer->setInterval(2000); // 2 seconds
+    connect(statusTimer, &QTimer::timeout, [this]() {
+        // Fade out the notification
+        QGraphicsOpacityEffect *fadeEffect = new QGraphicsOpacityEffect(this);
+        ui->statusLabel->setGraphicsEffect(fadeEffect);
+        QPropertyAnimation *animation = new QPropertyAnimation(fadeEffect, "opacity");
+        animation->setDuration(1000);
+        animation->setStartValue(1.0);
+        animation->setEndValue(0.0);
+        connect(animation, &QPropertyAnimation::finished, ui->statusLabel, &QLabel::hide);
+        animation->start(QPropertyAnimation::DeleteWhenStopped);
+    });
 }
 
 HomeWidget::~HomeWidget()
 {
-    if (db.isOpen()) {
-        db.close();
-    }
     delete ui;
 }
 
 void HomeWidget::on_dbConnectionButton_clicked()
 {
-    // Close any existing connection
-    QString connectionName;
-    {
-        QSqlDatabase existingDb = QSqlDatabase::database();
-        if (existingDb.isValid()) {
-            connectionName = existingDb.connectionName();
-            existingDb.close();
-        }
+    if (isConnecting) {
+        return;
     }
-    QSqlDatabase::removeDatabase(connectionName);
 
-    // Create a new connection
+    isConnecting = true;
+
     QString server = ui->serverLinedEdit->text();
     QString database = ui->dbLineEdit->text();
     QString username = ui->userLineEdit->text();
     QString password = ui->passwordLineEdit->text();
 
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName(QString("Driver={ODBC Driver 17 for SQL Server};Server=%1;Database=%2;Uid=%3;Pwd=%4;")
-                           .arg(server, database, username, password));
+    DatabaseManager& dbManager = DatabaseManager::getInstance();
 
-    if (db.open()) {
-        QMessageBox::information(this, "Connection", "Database connected successfully");
+    if(dbManager.isConnected() == true) dbManager.closeConnection(); //Close existing connection
+
+    bool success = dbManager.connectToDatabase(server, database, username, password);
+
+    if (success) {
+        showNotification("Database connected successfully", true);
     } else {
-        QMessageBox::critical(this, "Connection", "Database connection failed: " + db.lastError().text());
+        showNotification("Database connection failed", false);
     }
+
+    emit databaseConnectionChanged(success);
+
+    isConnecting = false;
 }
+
+void HomeWidget::showNotification(const QString &message, bool success)
+{
+    ui->statusLabel->setText(message);
+    ui->statusLabel->setStyleSheet(success ?
+                                         "QLabel { background-color : green; color : white; padding: 5px; border-radius: 5px; }" :
+                                         "QLabel { background-color : red; color : white; padding: 5px; border-radius: 5px; }");
+
+    ui->statusLabel->show();
+    statusTimer->start();
+}
+

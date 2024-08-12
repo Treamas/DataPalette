@@ -1,13 +1,13 @@
 #ifndef DATAPALETTEMAINWINDOW_H
 #define DATAPALETTEMAINWINDOW_H
 
-#include <QMainWindow>
-#include <QtSql/QSqlDatabase>
 #include "homewidget.h"
 #include "datawidget.h"
 #include "cleaningwidget.h"
 #include "visualizationwidget.h"
 #include "pluginwidget.h"
+
+#include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

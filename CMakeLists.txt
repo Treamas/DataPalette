@@ -31,6 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         datawidget.h datawidget.cpp datawidget.ui
         visualizationwidget.h visualizationwidget.cpp visualizationwidget.ui
         pluginwidget.h pluginwidget.cpp pluginwidget.ui
+        databasemanager.h databasemanager.cpp
 
     )
 # Define target properties for Android with Qt 6 as:
