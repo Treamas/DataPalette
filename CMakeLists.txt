@@ -9,8 +9,24 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Check if DP_VENV_PATH is set in the cache
+if(NOT DEFINED DP_VENV_PATH)
+    message(FATAL_ERROR "DP_VENV_PATH not set. Please set it in the CMakeCache.txt or pass it as a command line argument.")
+endif()
+
+# Now you can use DP_VENV_PATH
+message(STATUS "Using virtual environment path: ${DP_VENV_PATH}")
+
+set(Python3_ROOT_DIR "${DP_VENV_PATH}")
+set(Python3_EXECUTABLE "${DP_VENV_PATH}/Scripts/python.exe")
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Sql)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Sql)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+
+message(STATUS "Python3_EXECUTABLE: ${Python3_EXECUTABLE}")
+message(STATUS "Python3_INCLUDE_DIRS: ${Python3_INCLUDE_DIRS}")
+message(STATUS "Python3_LIBRARIES: ${Python3_LIBRARIES}")
 
 set(TS_FILES DataPalette_en_GB.ts)
 
@@ -59,6 +75,13 @@ endif()
 target_link_libraries(DataPalette PRIVATE 
 	Qt${QT_VERSION_MAJOR}::Widgets
 	Qt${QT_VERSION_MAJOR}::Sql
+    Python3::Python
+    Python3::Module
+)
+
+target_include_directories(DataPalette PRIVATE ${Python3_INCLUDE_DIRS})
+target_compile_definitions(DataPalette PRIVATE
+    PYTHON_SITE_PACKAGES_PATH="${DP_VENV_PATH}/Lib/site-packages"
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

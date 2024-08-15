@@ -64,8 +64,11 @@ CMakeLists.txt.user*
 *.Debug
 *.Release
 
-# Python byte code
+# Python cache files
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # Binaries
 # --------
@@ -74,6 +77,7 @@ CMakeLists.txt.user*
 
 # Ignore build directories
 build/
+.qtcreator/
 
 # Other common ignores
 *.obj

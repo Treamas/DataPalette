@@ -13,6 +13,84 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QGroupBox" name="cleaningGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>181</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Cleaning Plugins</string>
+   </property>
+   <widget class="QPushButton" name="cleaningButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Upload Cleaning Button</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="cleaningView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>161</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="visualizationGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>0</y>
+     <width>181</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Visualization Plugins</string>
+   </property>
+   <widget class="QPushButton" name="visualizationButton">
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>260</y>
+      <width>171</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Upload Visualization Button</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="visualizationView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>161</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>
