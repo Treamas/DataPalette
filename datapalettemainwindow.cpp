@@ -18,6 +18,14 @@ DataPaletteMainWindow::DataPaletteMainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(pluginWidget);
 
     connect(homeWidget, &HomeWidget::databaseConnectionChanged, dataWidget, &DataWidget::populateTableList);
+    connect(pluginWidget, &PluginWidget::visualizationPluginsUpdated,
+            visualizationWidget, &VisualizationWidget::updateVisualizationPlugins);
+
+    // connect(&DatabaseManager::getInstance(), &DatabaseManager::connectionChanged,
+    //         visualizationWidget, &VisualizationWidget::updateAvailableTables);
+
+    pluginWidget->triggerInitialVisualizationUpdate();
+    visualizationWidget->setPluginWidget(pluginWidget);
 }
 
 DataPaletteMainWindow::~DataPaletteMainWindow()

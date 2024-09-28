@@ -67,10 +67,11 @@ void HomeWidget::showNotification(const QString &message, bool success)
 {
     ui->statusLabel->setText(message);
     ui->statusLabel->setStyleSheet(success ?
-                                         "QLabel { background-color : green; color : white; padding: 5px; border-radius: 5px; }" :
-                                         "QLabel { background-color : red; color : white; padding: 5px; border-radius: 5px; }");
+                                       "QLabel { background-color : green; color : white; padding: 5px; border-radius: 5px; }" :
+                                       "QLabel { background-color : red; color : white; padding: 5px; border-radius: 5px; }");
 
     ui->statusLabel->show();
     statusTimer->start();
 }
+
 

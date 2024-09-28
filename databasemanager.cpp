@@ -30,6 +30,7 @@ bool DatabaseManager::connectToDatabase(const QString &server, const QString &da
     connected = db.open();
     if (connected) {
         qDebug() << "Database connected successfully";
+        // emit connectionChanged();
     } else {
         qDebug() << "Database connection failed:" << db.lastError().text();
     }
@@ -71,4 +72,40 @@ QStringList DatabaseManager::getUserTables()
     }
 
     return tables;
+}
+
+QStringList DatabaseManager::getTableColumns(const QString& tableName)
+{
+    QStringList columns;
+    if (connected) {
+        QSqlQuery query(db);
+        query.prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :tableName");
+        query.bindValue(":tableName", tableName);
+        if (query.exec()) {
+            while (query.next()) {
+                columns << query.value(0).toString();
+            }
+        }
+    }
+    return columns;
+}
+
+QVector<QVariant> DatabaseManager::getColumnData(const QString& tableName, const QString& columnName)
+{
+    QVector<QVariant> data;
+    if (connected) {
+        QSqlQuery query(db);
+        query.prepare(QString("SELECT [%1] FROM [%2]").arg(columnName, tableName));
+
+        if (query.exec()) {
+            while (query.next()) {
+                data.append(query.value(0));
+            }
+        } else {
+            qWarning() << "Failed to fetch data from" << tableName << "." << columnName << ": " << query.lastError().text();
+        }
+    } else {
+        qWarning() << "Database is not connected.";
+    }
+    return data;
 }
